@@ -1,0 +1,11 @@
+{
+	"hooks": {
+		"afterFileEdit": [
+			{
+				"command": "bun .cursor/hooks/biome-format.ts",
+				"matcher": "Write"
+			}
+		]
+	},
+	"version": 1
+}

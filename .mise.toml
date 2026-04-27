@@ -5,3 +5,6 @@ bun = "latest"
 [shell_alias]
 mi = "bun install"
 mr = "bun run"
+mx = "bunx"
+ma = "bun add"
+mu = "bun update"
