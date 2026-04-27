@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# starter-sample
 
-## Getting Started
+Next.js + React のスターターテンプレート。
 
-First, run the development server:
+## 前提条件
+
+- [mise](https://mise.jdx.dev/) — ランタイムバージョン管理
+- [Cursor](https://cursor.com/) or VS Code — エディタ（推奨拡張が `.vscode/extensions.json` に定義済み）
+
+## セットアップ
+
+mise がシェルエイリアスを提供する: `mi` = `bun install`、`mr` = `bun run`。
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# mise でランタイムをインストール（Node 24 + Bun）
+mise install
+
+# 依存パッケージをインストール
+mi
+
+# .env の復号鍵を設定（チームメンバーから受け取る）
+# .env.keys ファイルを配置するか、環境変数として設定
+export DOTENV_PRIVATE_KEY="..."
+
+# 開発サーバー起動
+mr dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## スクリプト
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| コマンド | 説明 |
+|---|---|
+| `mr dev` | 開発サーバー起動 |
+| `mr build` | プロダクションビルド |
+| `mr start` | プロダクションサーバー起動 |
+| `mr check` | Biome によるリント・フォーマット検証 |
+| `mr fix` | Biome による自動修正 |
+| `mr test` | テスト実行 |
+| `mr test:watch` | テスト（ウォッチモード） |
+| `mr storybook` | Storybook 起動 |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 環境変数
 
-## Learn More
+[dotenvx](https://dotenvx.com/) で管理。`.env` は暗号化された状態でリポジトリにコミットする。
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# 値を追加・変更した後に暗号化
+dotenvx encrypt
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# 復号鍵は .env.keys に保存される（gitignore 済み）
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+環境変数は `env/server.ts` / `env/client.ts` で valibot スキーマにより検証され、不正な値があればビルド時にエラーになる。
 
-## Deploy on Vercel
+## ディレクトリ構成
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+app/          # Next.js App Router（ページ、レイアウト）
+common/       # 共通ユーティリティ・コンポーネント
+  components/ # 再利用可能な UI コンポーネント
+  hooks/      # カスタム React Hooks
+  lib/        # ユーティリティ関数（ライブラリの re-export）
+model/        # ドメイン層（型、スキーマ、ビジネスロジック）
+env/          # 環境変数のスキーマ定義・検証
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 技術スタック
+
+- **フレームワーク**: Next.js 16 (App Router) / React 19
+- **言語**: TypeScript (strict)
+- **スタイリング**: Tailwind CSS 4
+- **リント・フォーマット**: Biome
+- **テスト**: Vitest
+- **UI カタログ**: Storybook
+- **環境変数**: dotenvx + valibot
+- **パッケージマネージャー**: Bun
