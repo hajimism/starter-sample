@@ -1,0 +1,66 @@
+common:
+  - changed-files:
+      - any-glob-to-any-file: "common/**"
+
+components:
+  - changed-files:
+      - any-glob-to-any-file: "common/components/**"
+
+lib:
+  - changed-files:
+      - any-glob-to-any-file: "common/lib/**"
+
+app:
+  - changed-files:
+      - any-glob-to-any-file: "app/**"
+
+model:
+  - changed-files:
+      - any-glob-to-any-file: "model/**"
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file: ".github/**"
+
+config:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "biome.json"
+          - "tsconfig.json"
+          - "vitest.config.ts"
+          - "package.json"
+          - ".mise.toml"
+          - "bunfig.toml"
+
+storybook:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".storybook/**"
+          - "**/*.stories.tsx"
+
+test:
+  - changed-files:
+      - any-glob-to-any-file: "**/*.test.{ts,tsx}"
+
+docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.md"
+          - "docs/**"
+          - "LICENSE"
+
+deps:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "package.json"
+          - "bun.lock"
+          - "bunfig.toml"
+
+security:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".env*"
+          - "**/auth/**"
+          - "**/middleware.{ts,tsx}"
+          - ".github/workflows/**"
+          - "CODEOWNERS"
