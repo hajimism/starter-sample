@@ -1,0 +1,7 @@
+[tools]
+node = "24"
+bun = "latest"
+
+[shell_alias]
+mi = "bun install"
+mr = "bun run"
